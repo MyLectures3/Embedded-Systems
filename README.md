@@ -11,6 +11,10 @@ https://www.youtube.com/watch?v=0mckp3UdVmc
 
 Kaynaklar:
 
+Main:
+
+https://circuitdigest.com/microcontroller-projects/arduino-snake-game-using-8x8-led-matrix
+
 http://ucboyutbilgi.blogspot.com/2018/10/gunler-bugun-size-arduino-ile.html
 
 lcd ile video:
@@ -22,10 +26,6 @@ nokia :
 https://www.youtube.com/watch?v=-4qY7JBhQpY
 
 https://github.com/ondt/arduino-snake/
-
-matrix:
-
-https://circuitdigest.com/microcontroller-projects/arduino-snake-game-using-8x8-led-matrix
 
 on proteus:
 
