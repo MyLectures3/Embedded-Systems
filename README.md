@@ -27,3 +27,7 @@ matrix:
 
 https://circuitdigest.com/microcontroller-projects/arduino-snake-game-using-8x8-led-matrix
 
+on proteus:
+
+https://www.youtube.com/watch?v=tDxeX9pUZ6E
+
