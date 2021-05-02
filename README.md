@@ -19,6 +19,8 @@ https://circuitdigest.com/microcontroller-projects/arduino-snake-game-using-8x8-
 
 for max7219 matrix connection:
 
+https://www.youtube.com/watch?v=TjqxFGr6U4M
+
 https://www.youtube.com/watch?v=ogA4ilIMhi0&t=245s
 
 --------------------------------------------------------------
