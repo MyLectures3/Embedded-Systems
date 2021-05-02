@@ -13,4 +13,8 @@ Kaynaklar:
 
 http://ucboyutbilgi.blogspot.com/2018/10/gunler-bugun-size-arduino-ile.html
 
+lcd ile video:
+
+https://www.youtube.com/watch?v=Ko1ErQx622M&t=232s
+
 
