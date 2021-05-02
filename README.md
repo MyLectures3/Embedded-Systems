@@ -31,6 +31,10 @@ on proteus:
 
 https://www.youtube.com/watch?v=tDxeX9pUZ6E
 
+proteus ardunio :
+
+https://maker.pro/arduino/projects/how-to-simulate-arduino-projects-using-proteus
+
 code : 
 
 https://www.instructables.com/Arduino-Snake-Game-With-8x8-LED-Matrix/
