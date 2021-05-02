@@ -21,6 +21,8 @@ nokia :
 
 https://www.youtube.com/watch?v=-4qY7JBhQpY
 
+https://github.com/ondt/arduino-snake/
+
 matrix:
 
 https://circuitdigest.com/microcontroller-projects/arduino-snake-game-using-8x8-led-matrix
