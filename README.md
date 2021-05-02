@@ -17,4 +17,8 @@ lcd ile video:
 
 https://www.youtube.com/watch?v=Ko1ErQx622M&t=232s
 
+nokia :
+
+https://www.youtube.com/watch?v=-4qY7JBhQpY
+
 
