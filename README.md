@@ -15,6 +15,14 @@ Main:
 
 https://circuitdigest.com/microcontroller-projects/arduino-snake-game-using-8x8-led-matrix
 
+--------------------------------------------------------------
+
+for max7219 matrix connection:
+
+https://www.youtube.com/watch?v=ogA4ilIMhi0&t=245s
+
+--------------------------------------------------------------
+
 http://ucboyutbilgi.blogspot.com/2018/10/gunler-bugun-size-arduino-ile.html
 
 lcd ile video:
