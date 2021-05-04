@@ -7,6 +7,10 @@ Proteus 8 kurulum :
 
 https://www.youtube.com/watch?v=0mckp3UdVmc
 
+Proteus kapanma sorunu : 
+
+https://www.youtube.com/watch?v=1yl9lSKIXkM
+
 --------------------------------------------------------------
 
 Kaynaklar:
