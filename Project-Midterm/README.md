@@ -31,6 +31,11 @@ https://www.youtube.com/watch?v=ogA4ilIMhi0&t=245s
 
 http://ucboyutbilgi.blogspot.com/2018/10/gunler-bugun-size-arduino-ile.html
 
+--------------------------------------------------------------
+Matrix yazma kütüphanesi : 
+
+https://lastminuteengineers.com/max7219-dot-matrix-arduino-tutorial/
+
 lcd ile video:
 
 https://www.youtube.com/watch?v=Ko1ErQx622M&t=232s
