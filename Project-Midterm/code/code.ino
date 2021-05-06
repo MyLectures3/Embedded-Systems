@@ -19,12 +19,12 @@ buttons are connected to the following pins
 //define the starting snake_len of the snake (must be < 8)
 #define START_LEN 3
 
-const int numDevices = 1;      // number of MAX7219s used in this case 2
+const int numDevices = 1;      // number of MAX7219s used in this case 1
 const long scrollDelay = 20;   // adjust scrolling speed
 unsigned long bufferLong [14] = {0};  
 LedControl lc=LedControl(12,11,10,numDevices);//DATA | CLK | CS/LOAD | number of matrices
-const unsigned char scrollText[] PROGMEM ={"  GAME OVER  "};
-const unsigned char scrollTextStart[] PROGMEM ={"  PRESS START  "};
+const unsigned char scrollText[] PROGMEM ={"  G A M E  O V E R  "};
+const unsigned char scrollTextStart[] PROGMEM ={"  P R E S S  S T A R T  "};
 
 
 //setup our start velocities
@@ -79,6 +79,20 @@ void loop(){
         if (am_i_dead()){
           scrollMessage(scrollText);
           gamestart = false;
+          snake_len = 1;
+          snake[0][0] = random(0,8);
+          snake[0][1] = random(0,8);
+          for (int i = snake_len; i < START_LEN; i++){
+              extend_snake();
+          }
+          new_apple();
+          lc.clearDisplay(0);
+          for (int x=0; x<numDevices; x++)
+          {
+          lc.shutdown(x,false);       //The MAX72XX is in power-saving mode on startup
+          lc.setIntensity(x,8);       // Set the brightness to default value
+          lc.clearDisplay(x);         // and clear the display
+          }
           return;
         }
         check_buttons();
@@ -957,16 +971,8 @@ const unsigned char font5x7 [] PROGMEM = {      //Numeric Font Matrix (Arranged 
     B00000000,
     B00000000,
     5,
-    
-    B00000000,  // smiley
-    B01100000,
-    B01100110,
-    B00000000,
-    B10000001,
-    B01100110,
-    B00011000,
-    5
 };
+
 bool am_i_dead(){
     for (int i = 0; i < snake_len-2; i++){
         if (snake[i][0] == snake[snake_len-1][0] && snake[i][1] == snake[snake_len-1][1]){
@@ -1026,6 +1032,7 @@ void check_buttons(){
         vy = 0;
     }
 }
+
 void scrollFont() {
     for (int counter=0x20;counter<0x80;counter++){
         loadBufferLong(counter);
@@ -1048,6 +1055,9 @@ void scrollMessage(const unsigned char * messageString) {
     } 
     while (myChar != 0);
 }
+
+
+
 // Load character into scroll buffer
 void loadBufferLong(int ascii){
     if (ascii >= 0x20 && ascii <=0x7f){
