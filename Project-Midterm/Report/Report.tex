@@ -1,0 +1,359 @@
+\documentclass[onecolumn]{article}
+%\usepackage{url}
+%\usepackage{algorithmic}
+\usepackage[a4paper]{geometry}
+\usepackage{datetime}
+\usepackage[margin=2em, font=small,labelfont=it]{caption}
+\usepackage{graphicx}
+\usepackage{mathpazo} % use palatino
+\usepackage[scaled]{helvet} % helvetica
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\makeatletter
+\renewcommand{\title}[1]{\renewcommand{\@title}{\color{\@titlecolor}#1}}
+\newcommand{\@titlecolor}{red!75!black}
+\newcommand{\titlecolor}[1]{\renewcommand{\@titlecolor}{#1}}
+\makeatother
+
+\usepackage{listings} 
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\documentclass[12pt]{article}
+\usepackage[many]{tcolorbox}
+\usepackage{marginnote}
+\usepackage{kantlipsum}
+\tcbuselibrary{skins,breakable}
+\newtcolorbox{story}[1][]{
+    width=\textwidth,
+    colback=magenta!20,
+    colframe=red!75!black,
+    colbacktitle=blue!75!black,
+    fonttitle=\bfseries,
+    left=0ex,
+    right=0ex,
+    top=0pt,
+    arc=0pt,
+    outer arc=0pt,
+    leftrule=0pt,
+    rightrule=0pt,
+    toprule=0pt,
+    bottomrule=0pt,
+    breakable,
+    enhanced jigsaw,
+    title= #1}
+
+\hypersetup{   
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+}
+
+\lstset{frame=tb,
+  language=python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=2
+}
+
+\documentclass[12pt]{article}
+\usepackage[many]{tcolorbox}
+\usepackage{marginnote}
+\usepackage{kantlipsum}
+\tcbuselibrary{skins,breakable}
+\newtcolorbox{story}[1][]{
+    width=\textwidth,
+    colback=magenta!20,
+    colframe=red!75!black,
+    colbacktitle=blue!75!black,
+    fonttitle=\bfseries,
+    left=0ex,
+    right=0ex,
+    top=0pt,
+    arc=0pt,
+    outer arc=0pt,
+    leftrule=0pt,
+    rightrule=0pt,
+    toprule=0pt,
+    bottomrule=0pt,
+    breakable,
+    enhanced jigsaw,
+    title= #1}
+
+
+
+
+% Letterspacing macros
+\newcommand{\spacecaps}[1]{\textls[200]{\MakeUppercase{#1}}}
+\newcommand{\spacesc}[1]{\textls[50]{\textsc{\MakeLowercase{#1}}}}
+
+\title{\spacecaps{CENG 3006 Introduction to Embedded Systems \\ Snake Game }
+\color{blue!75!black}
+\normalsize
+\spacesc{} }
+
+\author{ Gizem PESEN 170709050\\}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+ Main goal in this project is to design a fun snake game that can be controlled with a joystick. This is a project draft, the program has been successfully written in C language, it is simulated by using buttons instead of joysticks.
+    
+\end{abstract}
+
+\textbf{Note :} You can click the blue links to go to the specified location.
+
+\tableofcontents
+.
+\section{Introduction}
+
+Snake Game is the common name for a video game concept where the player maneuvers a line which grows in length, with the line itself being a primary obstracle. \href{https://en.wikipedia.org/wiki/Snake_(video_game_genre)}{{[1]}} The concept originated in the 1967 {arcada game Blockade\href{https://en.wikipedia.org/wiki/Arcade_game}{ [2]}} Snake game became the favorite game of all children of an era. One of the reasons why the snake game is so popular; Nokia was putting the game on a led matrix with Arduino and let the player control snake with a joystick.  
+
+\section{Project Details}
+
+It is planned on Project proporsal to use 8*8 Led Matrix display for displaying the snake and its food dot, Joystick for giving directions and starting the game , and finally an Arduino Uno to control the whole process. In this Simulation part, Except Joystick, We stayed true to everything we planned in Project Proporsal.In the final part, the joystick will be used in the project, but while simulating, such a way has been followed since there is no joystick in the simulation programs.
+
+All codes are written in C language on Arduino Ide  \href{https://www.arduino.cc/en/software}{ {[13]}} and successfully simulated as planned using the Proteus 8 program.
+
+
+
+
+
+\section{Implementation}
+
+\subsection{Libraries}
+
+\subsubsection{LedControl}
+
+LedControl is a library for the MAX7221 and MAX7219 Led display drivers. Only a few components are needed to control 64 Leds or a 7-segment display.\href{http://wayoda.github.io/LedControl/}{ [4]}} The library can be added from the add libraries in Arduino IDE section, as well as we added it a zip file from github. 
+\href{https://github.com/wayoda/LedControl}{ {[5]}} 
+
+\subsubsection{MD MAX72XX}
+
+ It is added this library a zip file from github. 
+\href{ https://github.com/MajicDesigns/MD_MAX72XX}{ {[3]}} 
+
+\subsection{Functions}
+
+\subsubsection{setup()}
+
+As seen in the code below, we can adjust or clear the light from the\textbf{ Led Control} library. This is for opening  setting brighntess and clearing things.
+
+\begin{lstlisting}[language=C, caption= LedControl]
+    //setup the chip 
+    lc.shutdown(0,false); //wake it
+    lc.setIntensity(0,15); //set brighntess
+    lc.clearDisplay(0); //clear it
+\end{lstlisting}
+.\\\\
+
+
+
+\begin{lstlisting}[language=C, caption= Buttons]
+	#define UP  2
+	#define RIGHT 3
+	#define DOWN 4
+	#define LEFT  5
+	#define START 6
+    
+    pinMode(RIGHT, INPUT_PULLUP);
+\end{lstlisting}
+
+The keys connected to Arduino are defined in the code, the direction of the snake can be adjusted with the \textbf{defined direction keys}.For using the keys it is defined \textbf{pinMode} used.The picture below shows how all buttons are connected to Arduino. The reason that the 2,3,4,5,6 defined in the code matches this way is because they are connected in this way.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=5cm]{img2.png}
+\caption{Buttons and It is connection with Arduino \label{}}
+\end{figure}
+
+\begin{lstlisting}[language=C, caption= For loop]
+    for (int i = snake_len; i < START_LEN; i++){
+        extend_snake(); 
+    } 
+    new_apple(); //create new apple function 
+\end{lstlisting}
+
+In this for loop we call \textbf{extend snake} function. With this part we can increase the \textbf{lenght of snake}. 
+
+\subsubsection{loop()}
+
+At first we define \textbf{gamestart} false as boolean. This makes the code aware of whether the game has started or not. The \textbf{text Start will scroll }on the screen until the user presses the start button.
+  
+  \begin{lstlisting}[language=C, caption= Start Message]
+  bool gamestart = false;
+    while(digitalRead(START)){
+      scrollMessage(scrollTextStart); //to show start message on the dot matrix
+      }
+      \end{lstlisting}
+      
+    
+      
+      \begin{lstlisting}[language=C, caption= While Loop]
+    gamestart = true;
+    while(gamestart){
+        if (am_i_dead()){
+          scrollMessage(scrollText); //it shows game over
+          gamestart = false; 
+          snake_len = 1; //starting snake lenght
+          snake[0][0] = random(0,8); //start snake random place
+          snake[0][1] = random(0,8);
+          \end{lstlisting}
+          
+          Within this \textbf{while loop }in the code, there is an\textbf{ am I dead} function. Whether the snake died within the cycle is questioned.
+     
+
+\subsubsection{am i dead()}
+
+As can be understood from the name\textbf{ Am I dead}, it is the function called in the \textbf{loop} section, where we understand that the snake has not died according to its size.
+
+\begin{lstlisting}[language=C, caption= Am I dead]
+bool am_i_dead(){
+    for (int i = 0; i < snake_len-2; i++){
+        if (snake[i][0] == snake[snake_len-1][0] && snake[i][1] == snake[snake_len-1][1]){
+            return true;
+        }
+    }
+    return false;
+}
+\end{lstlisting}
+
+\subsubsection{check eaten apple()}
+
+Did the snake eat the apple or not? This is a question that can be queried with an if statement. Therefore, if is used in check eaten apple function. If the apple is eaten, the length will be increased with Extend Snake and a new apple will be created with the New Apple function.
+
+\begin{lstlisting}[language=C, caption= Check Eaten Apple]
+void check_eaten_apple(){
+    if (snake[snake_len-1][0] == apple[0] && snake[snake_len-1][1] == apple[1]){    //eaten an apple
+        extend_snake(); //call extend snake
+        new_apple();  //call new apple
+    }
+}
+\end{lstlisting}
+.\\\\
+\subsubsection{new apple()}
+
+With the new apple function, a new apple is formed randomly.
+
+\begin{lstlisting}[language=C, caption= New Apple]
+void new_apple() {
+     apple[0] = random(0,8); //new apple in random place
+     apple[1] = random(0,8);
+}
+\end{lstlisting}
+
+\subsubsection{move snake()}
+With the Move snake function, the snake is able to move forward.Arrays have been used to drive the snake forward.
+\begin{lstlisting}[language=C, caption= Move Snake]
+void move_snake(){
+    for (int i = 0; i < snake_len-1; i++){
+        snake[i][0] = snake[i+1][0];
+        snake[i][1] = snake[i+1][1];
+    }
+    snake[snake_len-1][0] = (snake[snake_len - 2][0] + vx + 8) % 8;
+    snake[snake_len-1][1] = (snake[snake_len - 2][1] + vy + 8) % 8;
+}
+\end{lstlisting}
+
+
+\subsubsection{extend snake()}
+
+Extend Snake function has been used to lengthen the length of the snake using Array.
+
+\begin{lstlisting}[language=C, caption= Extend Snake]
+void extend_snake(){
+    snake[snake_len][0] = (snake[snake_len - 1][0] + vx + 8) % 8;
+    snake[snake_len][1] = (snake[snake_len - 1][1] + vy + 8) % 8;
+    snake_len++;
+}
+\end{lstlisting}
+
+
+
+\section{Simulation}
+
+\subsection{Proteus 8 Set Up}
+
+In this project, proteus 8 program was used, considering that it is suitable for use. \href{https://www.youtube.com/watch?v=0mckp3UdVmc}{ {[6]}} \href{https://www.youtube.com/watch?v=1yl9lSKIXkM}{ {[7]}} 
+\\\href{https://maker.pro/arduino/projects/how-to-simulate-arduino-projects-using-proteus}{ {[8]}} 
+One of the differences between Proteus and Simule Ide is the use of a library for Arduino access in the Proteus program. We had to research it to Simulate with Arduino Uno.
+.\\\\
+
+\subsection{System Kits On Simulation}
+
+\begin{itemize}
+\item Arduino Uno
+
+A library for Arduino Uno simulation has been added to this program. \href{https://youtu.be/eeRzhR1pfnY}{{[9]}} 
+
+\item Matrix 8*8 Red
+
+It is recommended to use Red Matrix because first I tried with blue one and it didn't show the game clearly.
+\item Max 7219
+\item Buttons (Left, Down, Right, Up , Start)
+\end{itemize}
+
+watch \href{https://www.youtube.com/watch?v=kvo1VcnqueU}{{[DEMO]}} 
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=14cm]{img1.png}
+\caption{Simulation \label{}}
+\end{figure}
+
+\subsection{Connection}
+
+ It is connected between Led Matrix and max7219 . To connect them watched videos and searched whole things. \href{https://www.youtube.com/watch?v=ogA4ilIMhi0&t=245s}{ {[10]}} \href{https://www.youtube.com/watch?v=TjqxFGr6U4M}{ {[11]}}  . \href{https://www.youtube.com/watch?v=Ko1ErQx622M&t=232s}{ {[12]}}  . 
+
+
+.\\\\
+\section{References }
+\\
+\textbf{[1]}  Gerard Goggin (2010),Global Mobile Media,Taylor & Francis, p.101 , retrieved April 7, 2011 
+\\
+\textbf{[2]}   Rusel DeMaria & Johnny L. Wilson (2003). High score!: the illustrated history of electronic games (2 ed.). McGraw-Hill Professional. p. 24. ISBN 0-07-223172-6. Retrieved April 7, 2011.
+\\
+ \textbf{[3]} \url{https://github.com/MajicDesigns/MD_MAX72XX}
+\\
+\textbf{[4]}\url{http://wayoda.github.io/LedControl/}
+\\
+\textbf{[5]}\url{https://github.com/wayoda/LedControl}
+\\
+\textbf{[6]}\url{https://www.youtube.com/watch?v=0mckp3UdVmc}
+\\
+\textbf{[7]}\url{https://www.youtube.com/watch?v=1yl9lSKIXkM}
+\\
+\textbf{[8]}\url{https://maker.pro/arduino/projects/how-to-simulate-arduino-projects-using-proteus}
+\\
+\textbf{[9]}\url{https://youtu.be/eeRzhR1pfnY}
+\\
+\textbf{[10]}
+\url{https://circuitdigest.com/microcontroller-projects/arduino-snake-game-using-8x8-led-matrix}
+\\
+\textbf{[11]}
+\url{http://ucboyutbilgi.blogspot.com/2018/10/gunler-bugun-size-arduino-ile.html}
+\\
+\textbf{[12]}\url{
+https://www.youtube.com/watch?v=Ko1ErQx622M&t=232s}
+\\
+
+
+\end{document}
